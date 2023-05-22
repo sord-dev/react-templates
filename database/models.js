@@ -18,3 +18,24 @@ module.exports.user = db.define('User', {
     }
 });
 
+module.exports.component = db.define('Component', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    name: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    thumbnail_url: {
+        type: DataTypes.STRING
+    }
+});
+
+
