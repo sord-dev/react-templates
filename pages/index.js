@@ -5,19 +5,16 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 
-import ss from '../public/first_ss.json';
-
 // todo
 
 // 1. add login/signup page
-// 2. allow file uploads (jsx + css aka rar or folder?)
-// 3. show component preview
+// 2. allow file uploads (jsx + css aka two files, both strings)
+// 3. show component preview -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
 // 4. download component + css
 // 5. like component posts
 
 export default function Home({ latestComponents = [] }) {
   const [query, setQuery] = useState('');
-  const imgRef = useRef(null)
 
   const handleSearch = (e) => { // set query and reset form values
     e.preventDefault();
@@ -31,24 +28,10 @@ export default function Home({ latestComponents = [] }) {
     }
   }
 
-  const parseImageBuffer = () => {
-    const imageBlob = new Blob([ss.screenshot.data], { type: 'image/png' });
-    
-    const imageUrl = URL.createObjectURL(imageBlob);
-  
-    if (imgRef.current) {
-      imgRef.current.href = imageUrl;
-    }
-  };
-
   useEffect(() => { // log query on stage change, will search for components from server
     if (!query) return;
     console.log(query)
   }, [query])
-
-  useEffect(() => { // log query on stage change, will search for components from server
-   parseImageBuffer()
-  }, [])
 
   return (
     <Layout>
@@ -64,8 +47,6 @@ export default function Home({ latestComponents = [] }) {
           <h4>Latest Components</h4>
           <p>Check out the most viewed latest components here.</p>
         </div>
-
-        <a ref={imgRef} alt="idk" >get me</a>
 
         <ComponentDisplayGrid components={latestComponents} />
       </section>
