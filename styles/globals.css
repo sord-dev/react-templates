@@ -15,12 +15,78 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.container {
+  max-width: 94%;
+  margin: 0 auto;
+  padding: 0 6px;
 }
+
+.btn {
+  color: white;
+  padding: 8px 16px;
+  border: 1px solid white;
+  border-radius: 6px;
+  font-size: 1em;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background-color: #66d7de;
+  border: 1px solid transparent;
+}
+
+/* layout styles */
+
+main {
+  min-height: 80vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+header,
+footer {
+  background-color: #313338;
+  padding: 6px 12px;
+  color: white;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+}
+
+.title {
+  font-weight: 200;
+}
+
+.title span {
+  color: #66d7de;
+  font-weight: 500;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.footer-container {
+  text-align: center;
+}
+
+.footer-container a {
+  color: #66d7de;
+  text-decoration: underline;
+}
+
+/* responsive styles */

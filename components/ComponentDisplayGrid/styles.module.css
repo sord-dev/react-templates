@@ -1,0 +1,35 @@
+/* latest components section styles */
+
+.latest-components-section h4 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+  
+  .latest-components-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 1.5em;
+  }
+  
+  .grid-item h5 {
+    font-size: 1em;
+    text-transform: capitalize;
+    margin-bottom: 0;
+  }
+  
+  .grid-item-thumbnail {
+    border: 1px solid black;
+    padding: 4px 8px;
+    width: 530px;
+    height: 300px;
+    position: relative;
+  }
+  
+  .grid-item-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  
