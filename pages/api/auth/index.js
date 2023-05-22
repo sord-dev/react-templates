@@ -1,5 +1,5 @@
 import { connect } from "../../../database/connect.js";
-import { user } from '../../../database/models.js'
+import { User } from '../../../database/models.js'
 
 export default async function handler(req, res) {
     await connect()
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     switch (req.method) {
         case 'GET':
             try {
-                const users = await user.findAll();
+                const users = await User.findAll();
                 const sanitised = users.map((u) => ({ ...u.dataValues, password: null }))
 
                 res.status(200).json({ usersCount: sanitised.length, users: sanitised })

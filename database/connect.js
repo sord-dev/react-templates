@@ -12,4 +12,4 @@ const conn = async () => {
 };
 
 module.exports.db = sequelize;
-module.exports.connect = conn; 
+module.exports.connect = conn;

@@ -1,6 +1,6 @@
 import { compare } from "bcrypt";
 import { connect } from "../../../database/connect.js";
-import { user } from '../../../database/models.js'
+import { User } from '../../../database/models.js'
 
 export default async function handler(req, res) {
     await connect()
@@ -8,12 +8,12 @@ export default async function handler(req, res) {
     switch (req.method) {
         case 'POST':
             try {
-                const foundUser = await user.findOne({ where: { username: req.body.username } });
+                const foundUser = await User.findOne({ where: { username: req.body.username } });
 
                 const match = await compare(req.body.password, foundUser.password);
 
                 if (match) {
-                    res.status(200).json(foundUser)
+                    res.status(200).json({ ...foundUser.dataValues, password: null })
                 } else {
                     res.status(401).json({ error: 'Incorrect Password.' })
                 }

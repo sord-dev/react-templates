@@ -1,7 +1,6 @@
 import { genSalt, hash } from "bcrypt";
 import { connect } from "../../../database/connect.js";
-import { user } from '../../../database/models.js'
-
+import { User } from '../../../database/models.js'
 
 export default async function handler(req, res) {
     await connect()
@@ -12,12 +11,13 @@ export default async function handler(req, res) {
                 const salt = await genSalt();
                 const hashed = await hash(req.body.password, salt);
 
-                const newUser = await user.create({ username: req.body.username, password: hashed });
+                const newUser = await User.create({ username: req.body.username, password: hashed });
 
                 res.status(200).json({ ...newUser.dataValues, password: null })
             } catch (error) {
+                let message = error.message;
 
-                res.status(500).json({ error: error.errors[0].message })
+                res.status(500).json({ error: message })
             }
             break;
 

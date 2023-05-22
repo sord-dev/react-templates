@@ -12,24 +12,26 @@ export function ComponentDisplayGrid({ components = [] }) {
 
     return (
         <div className={styles['latest-components-grid']}>
-            {components.map((c, i) => <ComponentDisplayGridItem  {...c} key={c.id || i+c.title} />)}
+            {components.map((c, i) => <ComponentDisplayGridItem  {...c} key={c.component_id || i + c.title} />)}
         </div>
     )
 }
 
-function ComponentDisplayGridItem({ title, publisher, publish_date, thumbnail_url = "https://via.placeholder.com/640x360" }) {
+function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url }) {
+    let src = thumbnail_url ? thumbnail_url : 'https://via.placeholder.com/640x360';
+
     return (
         <div className={styles['grid-item']}>
             <div className={styles['grid-item-thumbnail']}>
-                <Image src={thumbnail_url} alt="component showcase item" fill />
+                <Image src={src} alt="component showcase item" fill />
             </div>
             <h5>{title}</h5>
             <div className={styles['grid-item-meta']}>
                 <div>
-                    {publisher}
+                    {User.username}
                 </div>
 
-                <p>{publish_date}</p>
+                <p>{createdAt}</p>
             </div>
         </div>
     )

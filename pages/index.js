@@ -3,39 +3,9 @@ import { ComponentDisplayGrid, Layout } from '../components'
 
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
+import axios from 'axios';
 
-const TEMP_DATA = [
-  {
-    id: 1,
-    title: 'Component One',
-    publisher: 'Stef',
-    publish_date: 'Monday 22 May 2023',
-    thumbnail_url: 'https://via.placeholder.com/640x360'
-  },
-  {
-    id: 2,
-    title: 'Component Two',
-    publisher: 'Stef',
-    publish_date: 'Monday 22 May 2023',
-    thumbnail_url: 'https://via.placeholder.com/640x360'
-  },
-  {
-    id: 3,
-    title: 'Component Three',
-    publisher: 'Stef',
-    publish_date: 'Monday 22 May 2023',
-    thumbnail_url: 'https://via.placeholder.com/640x360'
-  },
-  {
-    id: 4,
-    title: 'Component Four',
-    publisher: 'Stef',
-    publish_date: 'Monday 22 May 2023',
-    thumbnail_url: 'https://via.placeholder.com/640x360'
-  }
-];
-
-export default function Home() {
+export default function Home({ latestComponents = []}) {
   const [query, setQuery] = useState('');
 
   const handleSearch = (e) => { // set query and reset form values
@@ -70,17 +40,36 @@ export default function Home() {
           <p>Check out the most viewed latest components here.</p>
         </div>
 
-        <ComponentDisplayGrid components={TEMP_DATA} />
+        <ComponentDisplayGrid components={latestComponents} />
       </section>
     </Layout>
   )
 }
 
-function HomePageSearchBar({onSubmit}) {
+function HomePageSearchBar({ onSubmit }) {
   return (
     <form onSubmit={onSubmit}>
-    <input type="text" name='component' placeholder='Table component...' />
-    <button className={styles['search-btn'] + ' btn'} ><AiOutlineSearch /></button>
-  </form>
+      <input type="text" name='component' placeholder='Table component...' />
+      <button className={styles['search-btn'] + ' btn'} ><AiOutlineSearch /></button>
+    </form>
   )
+}
+
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get('http://localhost:3000/api/component/top');
+
+    return {
+      props: {
+        latestComponents: response.data
+      }
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      props: {
+        latestComponents: []
+      }
+    }
+  }
 }
