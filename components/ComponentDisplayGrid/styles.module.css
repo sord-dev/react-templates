@@ -11,6 +11,10 @@
     justify-items: center;
     gap: 1.5em;
   }
+
+  .grid-item {
+    cursor: pointer;
+  }
   
   .grid-item h5 {
     font-size: 1em;

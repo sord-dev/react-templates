@@ -35,9 +35,6 @@ const TEMP_DATA = [
   }
 ];
 
-
-
-
 export default function Home() {
   const [query, setQuery] = useState('');
 
@@ -64,10 +61,7 @@ export default function Home() {
         <h3>Free Pre-made React Components</h3>
         <p>We&apos;re all sick of building the same components over and over... Well, here&apos;s a place to download them on the fly.</p>
 
-        <form onSubmit={handleSearch}>
-          <input type="text" name='component' placeholder='Table component...' />
-          <button className={styles['search-btn'] + ' btn'} ><AiOutlineSearch /></button>
-        </form>
+        <HomePageSearchBar onSubmit={handleSearch} />
       </section>
 
       <section className={styles['latest-components-section']}>
@@ -79,5 +73,14 @@ export default function Home() {
         <ComponentDisplayGrid components={TEMP_DATA} />
       </section>
     </Layout>
+  )
+}
+
+function HomePageSearchBar({onSubmit}) {
+  return (
+    <form onSubmit={onSubmit}>
+    <input type="text" name='component' placeholder='Table component...' />
+    <button className={styles['search-btn'] + ' btn'} ><AiOutlineSearch /></button>
+  </form>
   )
 }

@@ -40,15 +40,15 @@ a {
 
 /* layout styles */
 
-main {
-  min-height: 80vh;
-}
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+}
+
+footer {
+  margin-top: 24px;
 }
 
 header,
