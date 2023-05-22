@@ -5,6 +5,14 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 
+// todo
+
+// 1. add login/signup page
+// 2. allow file uploads (jsx + css aka rar or folder?)
+// 3. show component preview
+// 4. download component + css
+// 5. like component posts
+
 export default function Home({ latestComponents = []}) {
   const [query, setQuery] = useState('');
 

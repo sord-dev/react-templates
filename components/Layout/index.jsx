@@ -27,8 +27,6 @@ export function Layout({ children }) {
                 <div className='nav-controls'>
                     <button className='btn'>Login</button>
                     <button className='btn primary'>Sign Up</button>
-
-                    <div>theme switch</div>
                 </div>
             </header>
 
