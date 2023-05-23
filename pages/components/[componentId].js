@@ -2,12 +2,12 @@
 import { useRouter } from 'next/router';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-const components = { // from db
+const components = { // from db/server-side
   'component1': () => <h1 className="component1">Component 1</h1>,
   'component2': () => <h1 className="component2">Component 2</h1>,
 };
 
-const styles = { // from db
+const styles = { // from db/server-side
   'component1': '.component1 { color: red; }',
   'component2': '.component2 { color: blue; }',
 };

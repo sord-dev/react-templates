@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import { ComponentDisplayGrid, Layout } from '../components'
 
 import { AiOutlineSearch } from 'react-icons/ai'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 
 // todo

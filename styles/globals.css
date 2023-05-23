@@ -47,6 +47,10 @@ header {
   margin-bottom: 12px;
 }
 
+main {
+  min-height: 80vh;
+}
+
 footer {
   margin-top: 24px;
 }

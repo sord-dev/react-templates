@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export function Layout({ children }) {
@@ -14,19 +15,21 @@ export function Layout({ children }) {
             </Head>
 
             <header>
-                <div className='title-container container'>
-                    <Image src={'/favicon.svg'} width={72} height={72} alt='main logo' />
-                    <h2 className='title'>
-                        React
-                        <span>
-                            Templates
-                        </span>
-                    </h2>
-                </div>
+                <Link href={'/'}>
+                    <div className='title-container container'>
+                        <Image src={'/favicon.svg'} width={72} height={72} alt='main logo' />
+                        <h2 className='title'>
+                            React
+                            <span>
+                                Templates
+                            </span>
+                        </h2>
+                    </div>
+                </Link>
 
                 <div className='nav-controls'>
-                    <button className='btn'>Login</button>
-                    <button className='btn primary'>Sign Up</button>
+                    <Link href={'/login'}><button className='btn'>Login</button></Link>
+                    <Link href={'/register'}><button className='btn primary'>Sign Up</button></Link>
                 </div>
             </header>
 
