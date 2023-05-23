@@ -27,8 +27,9 @@ This is a web application for sharing React components. Users can upload their c
 
 3. Set up the database:
 
-   - Create a PostgreSQL database.
+   - Create a [PostgreSQL database](https://customer.elephantsql.com/instance/create).
    - Configure the database connection in `database/connect.js`.
+   - Add .env.local file and add NEXT_PUBLIC_DATABASE_URL which is a [PostgreSQL database connection string](https://stackoverflow.com/questions/3582552/what-is-the-format-for-the-postgresql-connection-string-url).
 
 4. Start the development server:
 
