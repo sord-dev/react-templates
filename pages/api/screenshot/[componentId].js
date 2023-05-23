@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer';
 export default async function handler(req, res) {
     if (req.method != 'GET') return res.status(404).json({ error: 'not found' });
     const { componentId } = req.query;
-    const componentURL = `http://localhost:3000/components/${componentId}`;
+    const componentURL = `http://localhost:3000/preview/${componentId}`;
 
     try {
         const browser = await puppeteer.launch();

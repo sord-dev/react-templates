@@ -10,6 +10,8 @@ export default async function handler(req, res) {
             try {
                 const foundUser = await User.findOne({ where: { username: req.body.username } });
 
+                if(!foundUser) throw new Error('No user found.')
+
                 const match = await compare(req.body.password, foundUser.password);
 
                 if (match) {
