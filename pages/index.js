@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { ComponentDisplayGrid, Layout } from '../components'
+import { DiscordProfile } from '../components/DiscordProfile'
 
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useEffect, useState } from 'react'

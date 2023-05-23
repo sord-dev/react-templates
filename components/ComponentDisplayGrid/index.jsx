@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import styles from './styles.module.css'
+import Link from 'next/link';
 
 // components = [c, c, c, c]
 // c = { title: 'component name', publisher: 'stef', publish_date: 'Monday 22 May 2023', thumbnail_url: "https://via.placeholder.com/640x360" }
@@ -17,22 +18,24 @@ export function ComponentDisplayGrid({ components = [] }) {
     )
 }
 
-function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url }) {
+function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url, component_id }) {
     let src = thumbnail_url ? thumbnail_url : 'https://via.placeholder.com/640x360';
 
     return (
-        <div className={styles['grid-item']}>
-            <div className={styles['grid-item-thumbnail']}>
-                <Image src={src} alt="component showcase item" fill />
-            </div>
-            <h5>{title}</h5>
-            <div className={styles['grid-item-meta']}>
-                <div>
-                    {User.username}
+        <Link href={`/components/component${component_id}`}>
+            <div className={styles['grid-item']}>
+                <div className={styles['grid-item-thumbnail']}>
+                    <Image src={src} alt="component showcase item" fill />
                 </div>
+                <h5>{title}</h5>
+                <div className={styles['grid-item-meta']}>
+                    <div>
+                        {User.username}
+                    </div>
 
-                <p>{createdAt}</p>
+                    <p>{createdAt}</p>
+                </div>
             </div>
-        </div>
+        </Link>
     )
 } 
