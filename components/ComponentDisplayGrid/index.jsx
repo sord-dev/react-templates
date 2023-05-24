@@ -33,7 +33,7 @@ function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url, compo
                         {User.username}
                     </div>
 
-                    <p>{createdAt}</p>
+                    <p>{new Date(createdAt).toLocaleString()}</p>
                 </div>
             </div>
         </Link>

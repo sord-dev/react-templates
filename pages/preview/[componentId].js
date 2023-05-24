@@ -14,7 +14,6 @@ export default function ComponentPage({ component }) {
   const { componentId } = router.query;
 
   if (component.code && componentId) {
-    console.log(component);
     return (
       <Layout>
         <h1>{component?.meta?.title}</h1>
