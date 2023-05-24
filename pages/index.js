@@ -1,6 +1,5 @@
 import styles from '../styles/Home.module.css'
 import { ComponentDisplayGrid, Layout } from '../components'
-import { DiscordProfile } from '../components/DiscordProfile'
 
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
@@ -8,11 +7,11 @@ import axios from 'axios';
 
 // todo
 
-// 1. add login/signup page
-// 2. allow file uploads (jsx + css aka two files, both strings)
-// 3. show component preview -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
-// 4. download component + css
-// 5. like component posts
+// 1. allow file uploads (jsx + css aka two files, both strings) - maybe use chatGPT to format the jsx files to the correct format -- no api key :c
+// 2. download component + css
+// 3. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
+// 4.5. explain how to format components with default props OR allow user to provide default props json?
+// 4. like component posts
 
 export default function Home({ latestComponents = [] }) {
   const [query, setQuery] = useState('');

@@ -6,6 +6,7 @@ function Create() {
     const { user } = useAuth();
     return (
         <Layout>
+            <h1>Upload Component</h1>
             <FileUploadForm user={user} />
         </Layout>
     )

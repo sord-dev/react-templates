@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+.btn {
+  color: black;
+  border: 1px solid black;
+  width: 180px;
+  align-self: center;
+}
