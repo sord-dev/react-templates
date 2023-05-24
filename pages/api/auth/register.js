@@ -2,6 +2,7 @@ import { genSalt, hash } from "bcrypt";
 import { connect } from "../../../database/connect.js";
 import { User } from '../../../database/models.js'
 
+
 export default async function handler(req, res) {
     await connect()
 
@@ -15,8 +16,7 @@ export default async function handler(req, res) {
 
                 res.status(200).json({ ...newUser.dataValues, password: null })
             } catch (error) {
-                let message = error.message;
-
+                let message = error?.errors[0]?.message || error.message;
                 res.status(500).json({ error: message })
             }
             break;

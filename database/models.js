@@ -12,8 +12,7 @@ const ComponentPost = db.define('ComponentPost', {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.STRING
   },
   likes: {
     type: DataTypes.INTEGER,

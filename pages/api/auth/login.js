@@ -10,7 +10,7 @@ export default async function handler(req, res) {
             try {
                 const foundUser = await User.findOne({ where: { username: req.body.username } });
 
-                if(!foundUser) throw new Error('No user found.')
+                if (!foundUser) return res.status(404).json({ error: 'No user found.' })
 
                 const match = await compare(req.body.password, foundUser.password);
 
@@ -22,7 +22,6 @@ export default async function handler(req, res) {
 
             } catch (error) {
                 return res.status(500).json({ error: error.message })
-
             }
             break;
 

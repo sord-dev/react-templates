@@ -1,26 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { transformSync } from '@babel/core';
+
+import styles from '../../styles/Preview.module.css'
+
 import fs from 'fs';
+
+import { GenerateDynamicComponent, Layout } from '../../components'
+import { AiOutlineDownload, AiOutlineCode } from 'react-icons/ai'
 
 export default function ComponentPage({ component }) {
   const router = useRouter();
   const { componentId } = router.query;
 
-  useEffect(() => {
-    document.body.style.backgroundColor = '#313338';
-  }, []);
-
   if (component.code && componentId) {
-    const DynamicComponent = eval(`(${component.code})`);
-    const jsx = <DynamicComponent React={React} />;
+    console.log(component);
     return (
-      <>
-        <style dangerouslySetInnerHTML={{ __html: component.css }} />
-        <div style={{ maxWidth: 'max-content', margin: '24px auto' }}>
-          {jsx}
+      <Layout>
+        <h1>{component?.meta?.title}</h1>
+        <div className={styles['component-preview']}>
+          <div className={styles['toolbar']}>
+            <div>
+              <button className={'btn ' + styles['btn']} ><AiOutlineCode /> Show Code</button>
+              <button className={'btn ' + styles['btn']} ><AiOutlineDownload /> Download</button>
+            </div>
+          </div>
+
+          <GenerateDynamicComponent code={component.code} css={component.css} />
+
+          <div className={styles['footer']}></div>
         </div>
-      </>
+      </Layout>
     );
   }
 
@@ -41,6 +51,7 @@ export async function getServerSideProps() {
       component: {
         code,
         css,
+        meta: { title: 'Discord Component!' }
       },
     },
   };

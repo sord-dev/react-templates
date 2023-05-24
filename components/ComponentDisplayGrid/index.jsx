@@ -22,7 +22,7 @@ function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url, compo
     let src = thumbnail_url ? thumbnail_url : 'https://via.placeholder.com/640x360';
 
     return (
-        <Link href={`/components/component${component_id}`}>
+        <Link href={`/preview/${component_id}`}>
             <div className={styles['grid-item']}>
                 <div className={styles['grid-item-thumbnail']}>
                     <Image src={src} alt="component showcase item" fill />

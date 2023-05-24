@@ -1,12 +1,14 @@
 import React from 'react'
 import { FileUploadForm, Layout } from '../../components'
+import { useAuth } from '../../contexts/authContext'
 
-function create() {
+function Create() {
+    const { user } = useAuth();
     return (
         <Layout>
-            <FileUploadForm />
+            <FileUploadForm user={user} />
         </Layout>
     )
 }
 
-export default create
+export default Create;

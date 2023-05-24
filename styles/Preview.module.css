@@ -1,0 +1,36 @@
+.component-preview {
+  width: 80%;
+  border-right: 2px solid #313338;
+  border-left: 2px solid #313338;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: none;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #313338;
+  padding: 12px 24px;
+  overflow: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.toolbar div {
+  display: flex;
+  gap: 1em;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.footer {
+  background-color: #313338;
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+}

@@ -1,6 +1,17 @@
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-export const FileUploadForm = () => {
+const uploadComponent = async (data) => {
+  const res = await axios.post('http://localhost:3000/api/component/create', data);
+
+  console.log(res) // toast notification for success or fail (prompt to look at component?)
+}
+
+export const FileUploadForm = ({ user = null }) => {
+  const router = useRouter()
+  if(!user) router.push('/login') // change this auth
+  const [fileName, setFileName] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileChange = (event) => {
@@ -30,12 +41,13 @@ export const FileUploadForm = () => {
         reader.readAsText(file);
       });
 
-      setTimeout(() => console.log(item), 200)
+      setTimeout(() => uploadComponent({ ...item, title: fileName, user_id: user.user_id }), 200)
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <input type="text" name="component_name" onChange={e => setFileName(e.target.value)} />
       <input type="file" multiple onChange={handleFileChange} />
       <button type="submit">Upload</button>
     </form>

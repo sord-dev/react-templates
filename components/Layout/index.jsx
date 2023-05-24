@@ -2,8 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { useAuth } from '../../contexts/authContext'
 
 export function Layout({ children }) {
+    const { user, logout } = useAuth()
     return (
         <>
             <Head>
@@ -28,9 +30,23 @@ export function Layout({ children }) {
                 </Link>
 
                 <div className='nav-controls'>
-                    <Link href={'/login'}><button className='btn'>Login</button></Link>
-                    <Link href={'/register'}><button className='btn primary'>Sign Up</button></Link>
-                    <Link href={'/component/create'}><button className='btn primary'>Upload</button></Link>
+                    {
+                        user ?
+                            (
+                                <>
+                                    <button onClick={logout} className='btn'>Sign Out</button>
+                                    <Link href={'/component/create'}><button className='btn primary'>Upload</button></Link>
+                                </>
+                            )
+                            :
+                            (
+                                <>
+                                    <Link href={'/login'}><button className='btn'>Login</button></Link>
+                                    <Link href={'/register'}><button className='btn primary'>Sign Up</button></Link>
+                                </>
+                            )
+                    }
+
                 </div>
             </header>
 
