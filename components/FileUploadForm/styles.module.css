@@ -19,3 +19,21 @@
   width: 180px;
   align-self: center;
 }
+
+.faq {
+  background-color: #0000005c;
+  display: flex;
+  align-content: center;
+  gap: 4px;
+  border-radius: 8px; 
+  max-width: max-content;
+  padding: 4px 8px;
+  color: #ffffff80;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.faq:hover {
+  background-color: #00000093;
+}

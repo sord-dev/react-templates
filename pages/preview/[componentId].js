@@ -27,7 +27,6 @@ export default function ComponentPage({ component }) {
     } else {
       console.log(res)
     }
-
   };
 
   if (component?.code && componentId) {

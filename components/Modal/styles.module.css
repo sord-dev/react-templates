@@ -1,0 +1,29 @@
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.609);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 24px;
+}
+
+.modal-container button {
+  color: black;
+  border: 1px solid black;
+}
+
+.modal-content {
+  background-color: white;
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 12px 24px;
+  border-radius: 6px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+}

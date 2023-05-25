@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
+import { BiQuestionMark } from 'react-icons/bi'
+
 import JSONPretty from 'react-json-pretty';
 import theme from 'react-json-pretty/themes/acai.css';
 
@@ -17,12 +19,13 @@ const uploadComponent = async (data, setError) => {
 
 }
 
-export const FileUploadForm = ({ user = null}) => {
+export const FileUploadForm = ({ user = null, setShow }) => {
   const [fileName, setFileName] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [json, setJSON] = useState('{ "items": [{ "tag": "github", "color": "white" }, { "tag": "linkedin", "color": "blue" }, { "tag": "cv", "color": "green" }], "thumbnail": "https://somerandom.place.png" }');
 
   const [error, setError] = useState(null);
+ 
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -51,7 +54,7 @@ export const FileUploadForm = ({ user = null}) => {
         reader.readAsText(file);
       });
 
-      setTimeout(async () => await uploadComponent({ ...item, title: fileName, user_id: user.user_id }, setError), 200)
+      setTimeout(async () => await uploadComponent({ ...item, title: fileName, user_id: user.user_id, defaultProps: json }, setError), 200)
     }
   };
 
@@ -65,7 +68,7 @@ export const FileUploadForm = ({ user = null}) => {
 
       <div className={styles['input-group']}>
         <label htmlFor="component_default_props" >Component Default Props</label>
-        <input type="text" onChange={e => setJSON(e.target.value)} value={json} />
+        <textarea type="text" onChange={e => setJSON(e.target.value)} value={json}/>
         <JSONPretty data={json} theme={theme} />
       </div>
 
@@ -74,7 +77,14 @@ export const FileUploadForm = ({ user = null}) => {
         <input type="file" multiple onChange={handleFileChange} required />
       </div>
 
+      <div>
+        <p className={styles['faq']} onClick={() => setShow(true)}>
+          <BiQuestionMark /> How do I upload a component?
+        </p>
+      </div>
+
       <button type="submit" className={'btn ' + styles['btn']} >Upload Component</button>
+
     </form>
   );
 };

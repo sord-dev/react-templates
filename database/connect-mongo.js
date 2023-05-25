@@ -22,9 +22,9 @@ const disconnectMongo = async () => {
 };
 
 // Function to save component guts to the MongoDB collection
-const saveComponentGuts = async ({ code, css }) => {
+const saveComponentGuts = async ({ code, css, defaultProps }) => {
     try {
-        const savedCode = await Gut.create({ code, css });
+        const savedCode = await Gut.create({ code, css, defaultProps });
 
         return savedCode._id.toString();
     } catch (error) {

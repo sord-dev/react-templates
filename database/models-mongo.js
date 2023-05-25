@@ -10,8 +10,7 @@ const GutsSchema = new mongoose.Schema({
         required: true,
     },
     defaultProps: {
-        type: Map,
-        of: String,
+        type: String,
         required: false
     }
 });

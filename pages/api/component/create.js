@@ -23,7 +23,7 @@ export default async function handler(req, res) {
           user_id: user.dataValues.user_id,
         });
 
-        const gutsId = await saveComponentGuts({css: req.body.css, code: req.body.code });
+        const gutsId = await saveComponentGuts({ css: req.body.css, code: req.body.code, defaultProps: JSON.stringify(req.body.defaultProps) });
 
         console.log('ID ', gutsId);
 
