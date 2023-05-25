@@ -67,9 +67,9 @@ function CodePreview({ codePreview = false, component = { unconverted: 'Error lo
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({query}) {
   try {
-    const componentDat = await axios.get('http://localhost:3000/api/component/1');
+    const componentDat = await axios.get(`http://localhost:3000/api/component/${query.componentId}`);
 
     const functionCode = extractFunctionFromCode(componentDat.data.jsx);
     const code = renderExtractedFunction(functionCode);

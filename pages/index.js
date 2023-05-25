@@ -7,10 +7,9 @@ import axios from 'axios';
 
 // todo
 
-// 1. allow file uploads (jsx + css aka two files, both strings) - maybe use chatGPT to format the jsx files to the correct format -- no api key :c
-// 2. download component + css
-// 3. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
-// 3.5. explain how to format components with default props OR allow user to provide default props json?
+// 1. download component + css
+// 2. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
+// 3. explain how to format components with default props OR allow user to provide default props json?
 // 4. like component posts
 // 5. add component approval stage by admins (preview component code and review weather it's malitious or not) RESTRICT COMPONENTS THAT MAKE CALLS
 // 6. session bassed auth for correct auth
