@@ -6,6 +6,18 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
+    const isMe = ({ username = '', user_id = '' }) => {
+        if(user?.username == username) {
+            return true 
+        }
+
+        else if(user?.user_id == user_id) {
+            return true 
+        }
+
+        return false 
+    }
+
     const login = async ({ username, password }) => {
 
         console.log({ username, password });
@@ -37,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout }}>
+        <AuthContext.Provider value={{ user, login, register, logout, isMe }}>
             {children}
         </AuthContext.Provider>
     );

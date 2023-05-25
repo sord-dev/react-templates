@@ -6,13 +6,19 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import styles from '../../styles/Preview.module.css'
 
 import { GenerateDynamicComponent, Layout } from '../../components'
-import { AiOutlineDownload, AiOutlineCode } from 'react-icons/ai'
+import { AiOutlineDownload, AiOutlineCode, AiOutlineDelete } from 'react-icons/ai'
 import axios from 'axios';
+import { useAuth } from '../../contexts/authContext';
 
 export default function ComponentPage({ component }) {
   const router = useRouter();
+  const { isMe } = useAuth();
   const [codePreview, setCodePreview] = useState(false)
   const { componentId } = router.query;
+
+  let owner = isMe({ username: component?.meta?.author })
+
+  console.log(owner);
 
   if (component?.code && componentId) {
     return (
@@ -24,10 +30,16 @@ export default function ComponentPage({ component }) {
 
         <div className={styles['component-preview']}>
           <div className={styles['toolbar']}>
+
+            <div>
+              {owner  ? <button className={'btn ' + styles['btn']}><AiOutlineDelete/> Delete</button> : null}
+            </div>
+
             <div>
               <button className={'btn ' + styles['btn']} onClick={() => setCodePreview(prev => !prev)} ><AiOutlineCode /> Show Code</button>
               <button className={'btn ' + styles['btn']} ><AiOutlineDownload /> Download</button>
             </div>
+
           </div>
 
           <GenerateDynamicComponent code={component.code} css={component.css} defaultProps={component.defaultProps} />

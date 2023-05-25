@@ -9,7 +9,7 @@
 
 .toolbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   background-color: #313338;
   padding: 12px 24px;
   overflow: none;

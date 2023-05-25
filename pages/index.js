@@ -2,19 +2,18 @@ import styles from '../styles/Home.module.css';
 import { ComponentDisplayGrid, Layout } from '../components';
 
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 // todo
 
 // 1. download component + css
 // 2. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of components with custom styles
-// 3. allow user to provide default props via json
+// 3. allow user to delete and update their uploaded components 
 // 4. like component posts
 // 5. add component approval stage by admins (preview component code and review weather it's malitious or not) RESTRICT COMPONENTS THAT MAKE CALLS
 // 6. session bassed auth for correct auth
-// 7. search components
-// 8. make 5 cool components to display on the site
+// 7. make 5 cool components to display on the site
 
 export default function Home({ latestComponents = [] }) {
   const [result, setResult] = useState([]);
