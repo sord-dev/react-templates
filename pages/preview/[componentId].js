@@ -89,7 +89,7 @@ export async function getServerSideProps() {
     return {
       props: {
         component: null,
-        error: error
+        error: error.message
       }
     };
   }

@@ -25,10 +25,7 @@ const ComponentMeta = db.define('ComponentMeta', {
     type: DataTypes.INTEGER,
     foreignKey: true,
   },
-  jsx_id: {
-    type: DataTypes.STRING
-  },
-  css_id: {
+  guts_id: {
     type: DataTypes.STRING
   }
 });

@@ -1,7 +1,8 @@
 import { connect } from '../../../database/connect.js';
-import { ComponentMeta, User } from '../../../database/models.js';
-import { CSS, Code } from '../../../database/models-mongo.js';
 import { connectMongo, disconnectMongo } from '../../../database/connect-mongo.js';
+
+import { ComponentMeta, User } from '../../../database/models.js';
+import { Gut } from '../../../database/models-mongo.js';
 
 const formatComponent = item => {
     let list = [item];
@@ -9,8 +10,7 @@ const formatComponent = item => {
         component_id: c.dataValues.component_id,
         title: c.dataValues.title,
         description: c.dataValues.description,
-        jsx: c.dataValues.jsx_id,
-        css: c.dataValues.css_id,
+        guts_id: c.dataValues.guts_id,
         author: {
             username: c.dataValues.User.username
         }
@@ -37,9 +37,9 @@ export default async function handler(req, res) {
                 let result = formatComponent(component) // format component
 
                 // request mongodb for file contents
-                const cssData = await CSS.findById(result.css)
-                const codeData = await Code.findById(result.jsx)
-                result = { ...result, jsx: codeData.code, css: cssData.css }
+                const guts = await Gut.findById(result.guts_id);
+                if (!guts) return res.status(404).json({ error: 'no such component data found' });
+                result = { ...result, jsx: guts.code, css: guts.css }
 
                 res.status(200).json(result);
                 await disconnectMongo()

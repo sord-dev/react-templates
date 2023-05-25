@@ -1,8 +1,7 @@
 import { connect } from '../../../database/connect.js';
 import { ComponentMeta, User } from '../../../database/models.js';
 import {
-  saveComponentCSS,
-  saveComponentCode,
+  saveComponentGuts,
   connectMongo,
   disconnectMongo,
 } from '../../../database/connect-mongo.js';
@@ -24,13 +23,12 @@ export default async function handler(req, res) {
           user_id: user.dataValues.user_id,
         });
 
-        const cssId = await saveComponentCSS(req.body.css);
-        const jsxId = await saveComponentCode(req.body.code);
+        const gutsId = await saveComponentGuts({css: req.body.css, code: req.body.code });
 
-        console.log('IDS ', { cssId, jsxId });
+        console.log('ID ', gutsId);
 
         newComponent = await ComponentMeta.update(
-          { jsx_id: jsxId, css_id: cssId },
+          { guts_id: gutsId },
           { where: { component_id: newComponent.component_id } }
         );
 
