@@ -18,7 +18,17 @@ export default function ComponentPage({ component }) {
 
   let owner = isMe({ username: component?.meta?.author })
 
-  console.log(owner);
+  const handleDeleteComponent = async (id) => {
+    const res = await axios.post('http://localhost:3000/api/component/delete', { component_id: id });
+
+    if (res.status == 200) {
+      router.push('/')
+      console.log(res.data)
+    } else {
+      console.log(res)
+    }
+
+  };
 
   if (component?.code && componentId) {
     return (
@@ -30,16 +40,14 @@ export default function ComponentPage({ component }) {
 
         <div className={styles['component-preview']}>
           <div className={styles['toolbar']}>
-
             <div>
-              {owner  ? <button className={'btn ' + styles['btn']}><AiOutlineDelete/> Delete</button> : null}
+              {owner ? <button onClick={() => handleDeleteComponent(component?.meta?.component_id)} className={'btn ' + styles['btn']}><AiOutlineDelete /> Delete</button> : null}
             </div>
 
             <div>
               <button className={'btn ' + styles['btn']} onClick={() => setCodePreview(prev => !prev)} ><AiOutlineCode /> Show Code</button>
               <button className={'btn ' + styles['btn']} ><AiOutlineDownload /> Download</button>
             </div>
-
           </div>
 
           <GenerateDynamicComponent code={component.code} css={component.css} defaultProps={component.defaultProps} />
@@ -106,7 +114,7 @@ export async function getServerSideProps({ query }) {
         component: {
           code,
           css: componentDat.data.css,
-          meta: { title: componentDat.data.title, author: componentDat.data.author.username },
+          meta: { title: componentDat.data.title, author: componentDat.data.author.username, component_id: componentDat.data.component_id },
           unconverted: componentDat.data.jsx,
           defaultProps
         },
