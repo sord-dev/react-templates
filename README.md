@@ -50,6 +50,7 @@ This is a web application for sharing React components. Users can upload their c
 
 - `/api/component/top`: Get the latest components.
 - `/api/component/:id`: Get a specific component by ID.
+- `/api/component/search?q=`: Search for components by name.
 - `/api/component/:id/like`: Like a component. - to be added
 - `/api/component/:id/comment`: Add a comment to a component. - to be added
 
