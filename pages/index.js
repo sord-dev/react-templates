@@ -8,14 +8,22 @@ import axios from 'axios';
 // todo
 
 // 1. download component + css
-// 2. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of hardcoded components with custom styles at the moment
-// 3. explain how to format components with default props OR allow user to provide default props json?
+// 2. show component preview thumbnail -- /api/screenshot/componentId takes a screenshot of components with custom styles
+// 3. allow user to provide default props via json
 // 4. like component posts
 // 5. add component approval stage by admins (preview component code and review weather it's malitious or not) RESTRICT COMPONENTS THAT MAKE CALLS
 // 6. session bassed auth for correct auth
+// 7. search components
+// 8. make 5 cool components to display on the site
 
 export default function Home({ latestComponents = [] }) {
-  const [query, setQuery] = useState('');
+  const [result, setResult] = useState([]);
+
+  const searchComponents = async (query) => {
+    const res = await axios.get(`http://localhost:3000/api/component/search?q=${query}`)
+
+    setResult(res.data)
+  }
 
   const handleSearch = (e) => { // set query and reset form values
     e.preventDefault();
@@ -24,15 +32,12 @@ export default function Home({ latestComponents = [] }) {
     const q = data.get('component');
 
     if (q) {
-      setQuery(q);
+      searchComponents(q);
       e.target.reset();
+    } else {
+      searchComponents('');
     }
   }
-
-  useEffect(() => { // log query on stage change, will search for components from server
-    if (!query) return;
-    console.log(query)
-  }, [query])
 
   return (
     <Layout>
@@ -49,7 +54,7 @@ export default function Home({ latestComponents = [] }) {
           <p>Check out the most viewed latest components here.</p>
         </div>
 
-        <ComponentDisplayGrid components={latestComponents} />
+        {result.length ? <ComponentDisplayGrid components={result} /> :  <ComponentDisplayGrid components={latestComponents} />}
       </section>
     </Layout>
   )

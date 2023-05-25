@@ -1,11 +1,11 @@
-function DiscordProfile({ React, items = [{ tag: 'github', color: 'white' }, { tag: 'linkedin', color: 'blue' }, { tag: 'cv', color: 'green' }] }) {
+function DiscordProfile({ React, defaultProps }) {
   return (
     <div className={'profile'}>
       <div className={'thumbnail'}>
         <img src="/bg.png" alt="profile background" draggable='false' fill />
       </div>
       <div className={'avatar'}>
-        <img src="https://i.pinimg.com/originals/74/52/d9/7452d9e99c3d42089f992e6d9b06724e.jpg" alt="pfp" draggable='false' />
+        <img src={defaultProps.thumbnail} alt="pfp" draggable='false' />
       </div>
 
       <div className={'body'}>
@@ -22,7 +22,7 @@ function DiscordProfile({ React, items = [{ tag: 'github', color: 'white' }, { t
 
         <h3>SOCIALS</h3>
         <div className={'tag-list'}>
-          {items.map(i => <div className={'social-tag'} key={i.tag}> <div style={{ backgroundColor: i.color }}></div> {i.tag}</div>)}
+          {defaultProps.items.map(i => <div className={'social-tag'} key={i.tag}> <div style={{ backgroundColor: i.color }}></div> {i.tag}</div>)}
         </div>
       </div>
     </div>

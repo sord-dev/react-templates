@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export function GenerateDynamicComponent({ code, css }) {
-    
+export function GenerateDynamicComponent({ code, css, defaultProps }) {
     const DynamicComponent = eval(`(${code})`);
-    const jsx = <DynamicComponent React={React} />;
+    const jsx = <DynamicComponent React={React} defaultProps={defaultProps} />;
 
     return (
         <>

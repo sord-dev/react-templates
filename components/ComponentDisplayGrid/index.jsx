@@ -18,8 +18,10 @@ export function ComponentDisplayGrid({ components = [] }) {
     )
 }
 
-function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url, component_id }) {
+function ComponentDisplayGridItem({ title, author, createdAt, thumbnail_url, component_id, User }) {
     let src = thumbnail_url ? thumbnail_url : 'https://via.placeholder.com/640x360';
+
+    let username = author ? author.username : User.username;
 
     return (
         <Link href={`/preview/${component_id}`}>
@@ -30,7 +32,7 @@ function ComponentDisplayGridItem({ title, User, createdAt, thumbnail_url, compo
                 <h5>{title}</h5>
                 <div className={styles['grid-item-meta']}>
                     <div>
-                        {User.username}
+                        {username}
                     </div>
 
                     <p>{new Date(createdAt).toLocaleString()}</p>

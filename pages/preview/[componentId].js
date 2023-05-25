@@ -17,7 +17,11 @@ export default function ComponentPage({ component }) {
   if (component?.code && componentId) {
     return (
       <Layout>
-        <h1>{component?.meta?.title}</h1>
+        <div className={styles['metadata']}>
+          <h1>{component?.meta?.title}</h1>
+          <p>{component?.meta?.author}</p>
+        </div>
+
         <div className={styles['component-preview']}>
           <div className={styles['toolbar']}>
             <div>
@@ -26,8 +30,8 @@ export default function ComponentPage({ component }) {
             </div>
           </div>
 
-          <GenerateDynamicComponent code={component.code} css={component.css} />
-          <CodePreview codePreview={codePreview} component={component} />
+          <GenerateDynamicComponent code={component.code} css={component.css} defaultProps={component.defaultProps} />
+          <CodePreview codePreview={codePreview} component={component} copyToClipboard={copyToClipboard} />
           <div className={styles['footer']}></div>
         </div>
 
@@ -39,7 +43,7 @@ export default function ComponentPage({ component }) {
   return <h1>Component Not Found</h1>;
 }
 
-function CodePreview({ codePreview = false, component = { unconverted: 'Error loading string', css: 'Error loading string' } }) {
+function CodePreview({ codePreview = false, component = { unconverted: 'Error loading string', css: 'Error loading string' }, copyToClipboard }) {
   return (
     <>
       {
@@ -47,14 +51,20 @@ function CodePreview({ codePreview = false, component = { unconverted: 'Error lo
           (
             <div className={styles['code-preview']}>
               <div>
-                <h4>JSX</h4>
+                <div className={styles['code-toolbar']}>
+                  <h4>JSX</h4>
+                  <button onClick={() => copyToClipboard(component?.unconverted)}>Copy</button>
+                </div>
                 <SyntaxHighlighter language="javascript">
                   {component?.unconverted}
                 </SyntaxHighlighter>
               </div>
 
               <div>
-                <h4>CSS</h4>
+                <div className={styles['code-toolbar']}>
+                  <h4>CSS</h4>
+                  <button onClick={() => copyToClipboard(component?.css)}>Copy</button>
+                </div>
                 <SyntaxHighlighter language="css">
                   {component?.css}
                 </SyntaxHighlighter>
@@ -67,12 +77,17 @@ function CodePreview({ codePreview = false, component = { unconverted: 'Error lo
   )
 }
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
   try {
     const componentDat = await axios.get(`http://localhost:3000/api/component/${query.componentId}`);
 
     const functionCode = extractFunctionFromCode(componentDat.data.jsx);
     const code = renderExtractedFunction(functionCode);
+
+    const defaultProps = {
+      thumbnail: 'https://i.pinimg.com/originals/74/52/d9/7452d9e99c3d42089f992e6d9b06724e.jpg',
+      items: [{ color: 'blue', tag: 'github' }, { color: 'green', tag: 'linkedin' }, { color: 'purple', tag: 'cv' }]
+    }
 
     return {
       props: {
@@ -80,7 +95,8 @@ export async function getServerSideProps({query}) {
           code,
           css: componentDat.data.css,
           meta: { title: componentDat.data.title, author: componentDat.data.author.username },
-          unconverted: componentDat.data.jsx
+          unconverted: componentDat.data.jsx,
+          defaultProps
         },
       },
     };
@@ -94,6 +110,8 @@ export async function getServerSideProps({query}) {
     };
   }
 }
+
+// server side helpers
 
 function extractFunctionFromCode(code) {
   const exportPattern = /export/gmi;
@@ -110,4 +128,10 @@ function renderExtractedFunction(functionCode) {
   }).code;
 
   return transformedCode.replace(/;\s*$/, '');
+}
+
+// client side helpers
+
+function copyToClipboard(string) {
+  navigator.clipboard.writeText(string);
 }

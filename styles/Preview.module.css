@@ -46,3 +46,13 @@
   margin-top: 12px;
   border-radius: 8px;
 }
+
+.metadata {
+  text-align: center;
+}
+
+.code-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
