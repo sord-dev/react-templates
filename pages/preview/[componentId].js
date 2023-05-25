@@ -5,17 +5,16 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import styles from '../../styles/Preview.module.css'
 
-import fs from 'fs';
-
 import { GenerateDynamicComponent, Layout } from '../../components'
 import { AiOutlineDownload, AiOutlineCode } from 'react-icons/ai'
+import axios from 'axios';
 
 export default function ComponentPage({ component }) {
   const router = useRouter();
   const [codePreview, setCodePreview] = useState(false)
   const { componentId } = router.query;
 
-  if (component.code && componentId) {
+  if (component?.code && componentId) {
     return (
       <Layout>
         <h1>{component?.meta?.title}</h1>
@@ -32,7 +31,7 @@ export default function ComponentPage({ component }) {
           <div className={styles['footer']}></div>
         </div>
 
-        
+
       </Layout>
     );
   }
@@ -69,24 +68,31 @@ function CodePreview({ codePreview = false, component = { unconverted: 'Error lo
 }
 
 export async function getServerSideProps() {
-  const [str, css] = await Promise.all([
-    fs.promises.readFile('./public/DiscordProfile/index.jsx').then((file) => file.toString()),
-    fs.promises.readFile('./public/DiscordProfile/index.module.css').then((file) => file.toString()),
-  ]);
+  try {
+    const componentDat = await axios.get('http://localhost:3000/api/component/1');
 
-  const functionCode = extractFunctionFromCode(str);
-  const code = renderExtractedFunction(functionCode);
+    const functionCode = extractFunctionFromCode(componentDat.data.jsx);
+    const code = renderExtractedFunction(functionCode);
 
-  return {
-    props: {
-      component: {
-        code,
-        css,
-        meta: { title: 'Discord Component!' },
-        unconverted: str
+    return {
+      props: {
+        component: {
+          code,
+          css: componentDat.data.css,
+          meta: { title: componentDat.data.title, author: componentDat.data.author.username },
+          unconverted: componentDat.data.jsx
+        },
       },
-    },
-  };
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        component: null,
+        error: error
+      }
+    };
+  }
 }
 
 function extractFunctionFromCode(code) {

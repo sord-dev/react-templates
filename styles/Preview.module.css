@@ -33,4 +33,16 @@
   background-color: #313338;
   padding: 12px 24px;
   border-radius: 0 0 8px 8px;
+  margin-top: 12px;
+}
+
+.code-preview {
+  max-width: 98%;
+  margin: 0 auto;
+  max-height: 500px;
+  overflow-y: scroll;
+  padding:6px 12px;
+  border: 1px solid #3133383d;
+  margin-top: 12px;
+  border-radius: 8px;
 }

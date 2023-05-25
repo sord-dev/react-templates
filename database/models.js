@@ -1,7 +1,7 @@
 const { db } = require('./connect.js');
 const { DataTypes } = require('sequelize');
 
-const ComponentPost = db.define('ComponentPost', {
+const ComponentMeta = db.define('ComponentMeta', {
   component_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -25,6 +25,12 @@ const ComponentPost = db.define('ComponentPost', {
     type: DataTypes.INTEGER,
     foreignKey: true,
   },
+  jsx_id: {
+    type: DataTypes.STRING
+  },
+  css_id: {
+    type: DataTypes.STRING
+  }
 });
 
 const User = db.define('User', {
@@ -44,40 +50,14 @@ const User = db.define('User', {
   },
 });
 
-const ComponentFile = db.define('ComponentFile', {
-  file_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  file_type: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  file_content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
-
-User.hasMany(ComponentPost, {
+User.hasMany(ComponentMeta, {
   foreignKey: 'user_id',
   as: 'componentPosts',
 });
 
-ComponentPost.belongsTo(User, {
+ComponentMeta.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
-ComponentPost.hasMany(ComponentFile, {
-  foreignKey: 'component_id',
-  as: 'componentFiles',
-});
-
-ComponentFile.belongsTo(ComponentPost, {
-  foreignKey: 'component_id',
-});
-
-module.exports.ComponentFile = ComponentFile;
-module.exports.ComponentPost = ComponentPost;
+module.exports.ComponentMeta = ComponentMeta;
 module.exports.User = User;

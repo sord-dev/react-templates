@@ -1,5 +1,5 @@
 import { connect } from '../../../database/connect.js';
-import { ComponentPost, User } from '../../../database/models.js';
+import { ComponentMeta, User } from '../../../database/models.js';
 
 export default async function handler(req, res) {
     await connect();
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     switch (req.method) {
         case 'GET':
             try {
-                const allComponents = await ComponentPost.findAll({
+                const allComponents = await ComponentMeta.findAll({
                     include: {
                         model: User,
                         attributes: ['username'],

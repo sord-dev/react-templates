@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import JSONPretty from 'react-json-pretty';
@@ -7,18 +6,23 @@ import theme from 'react-json-pretty/themes/acai.css';
 
 import styles from './styles.module.css'
 
-const uploadComponent = async (data) => {
-  const res = await axios.post('http://localhost:3000/api/component/create', data);
+const uploadComponent = async (data, setError) => {
+  try {
+    const res = await axios.post('http://localhost:3000/api/component/create', data);
+    console.log(res.data) // toast notification for success or fail (prompt to look at component?)
+  } catch (error) {
+    console.log(error);
+    setError(error.message)
+  }
 
-  console.log(res) // toast notification for success or fail (prompt to look at component?)
 }
 
-export const FileUploadForm = ({ user = null }) => {
-  const router = useRouter()
-  if (!user) router.push('/login') // change this auth
+export const FileUploadForm = ({ user = null}) => {
   const [fileName, setFileName] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [json, setJSON] = useState('');
+  const [json, setJSON] = useState('{ "items": [{ "tag": "github", "color": "white" }, { "tag": "linkedin", "color": "blue" }, { "tag": "cv", "color": "green" }], "thumbnail": "https://somerandom.place.png" }');
+
+  const [error, setError] = useState(null);
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -47,13 +51,13 @@ export const FileUploadForm = ({ user = null }) => {
         reader.readAsText(file);
       });
 
-      setTimeout(() => uploadComponent({ ...item, title: fileName, user_id: user.user_id }), 200)
+      setTimeout(async () => await uploadComponent({ ...item, title: fileName, user_id: user.user_id }, setError), 200)
     }
   };
 
-
   return (
     <form className={styles['form']} onSubmit={handleSubmit}>
+      {error ? error : null}
       <div className={styles['input-group']}>
         <label htmlFor="component_name" >Component Title</label>
         <input type="text" name="component_name" onChange={e => setFileName(e.target.value)} required />
@@ -61,7 +65,7 @@ export const FileUploadForm = ({ user = null }) => {
 
       <div className={styles['input-group']}>
         <label htmlFor="component_default_props" >Component Default Props</label>
-        <input type="text" onChange={e => setJSON(e.target.value)} />
+        <input type="text" onChange={e => setJSON(e.target.value)} value={json} />
         <JSONPretty data={json} theme={theme} />
       </div>
 
