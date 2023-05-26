@@ -3,6 +3,7 @@
 This is a web application for sharing React components. Users can upload their components, view previews of uploaded components, and download the component along with associated CSS styles. The project is built using Next.js, Sequelize, and MongoDB.
 
 ![image](https://github.com/sord-dev/react-templates/assets/75338985/74994950-fcc0-4241-b1e2-21aa7cf850fd)
+![image](https://github.com/sord-dev/react-templates/assets/75338985/f503e849-255d-429e-8e51-6b85800d4940)
 ![image](https://github.com/sord-dev/react-templates/assets/75338985/9b6ec855-6bd1-4895-9430-60dfa44d230a)
 
 ## Features
