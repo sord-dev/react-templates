@@ -103,11 +103,6 @@ export async function getServerSideProps({ query }) {
     const functionCode = extractFunctionFromCode(componentDat.data.jsx);
     const code = renderExtractedFunction(functionCode);
 
-    const defaultProps = {
-      thumbnail: 'https://i.pinimg.com/originals/74/52/d9/7452d9e99c3d42089f992e6d9b06724e.jpg',
-      items: [{ color: 'blue', tag: 'github' }, { color: 'green', tag: 'linkedin' }, { color: 'purple', tag: 'cv' }]
-    }
-
     return {
       props: {
         component: {
@@ -115,7 +110,7 @@ export async function getServerSideProps({ query }) {
           css: componentDat.data.css,
           meta: { title: componentDat.data.title, author: componentDat.data.author.username, component_id: componentDat.data.component_id },
           unconverted: componentDat.data.jsx,
-          defaultProps
+          defaultProps: componentDat.data.defaultProps
         },
       },
     };

@@ -1,8 +1,10 @@
 import React from 'react'
 
 export function GenerateDynamicComponent({ code, css, defaultProps }) {
+    let defaults = JSON.parse(defaultProps);
+
     const DynamicComponent = eval(`(${code})`);
-    const jsx = <DynamicComponent React={React} defaultProps={defaultProps} />;
+    const jsx = <DynamicComponent React={React} defaultProps={JSON.parse(defaults)} />;
 
     return (
         <>
@@ -10,7 +12,6 @@ export function GenerateDynamicComponent({ code, css, defaultProps }) {
             <div style={{ maxWidth: 'max-content', margin: '24px auto' }}>
                 {jsx}
             </div>
-           
         </>
     )
 }

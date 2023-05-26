@@ -13,7 +13,8 @@ const formatComponent = item => {
         guts_id: c.dataValues.guts_id,
         author: {
             username: c.dataValues.User.username
-        }
+        },
+        defaultProps: c.dataValues.defaultProps
     }))
 
     return formatted[0];
@@ -39,7 +40,7 @@ export default async function handler(req, res) {
                 // request mongodb for file contents
                 const guts = await Gut.findById(result.guts_id);
                 if (!guts) return res.status(404).json({ error: 'no such component data found' });
-                result = { ...result, jsx: guts.code, css: guts.css }
+                result = { ...result, jsx: guts.code, css: guts.css, defaultProps: guts.defaultProps }
 
                 res.status(200).json(result);
                 await disconnectMongo()

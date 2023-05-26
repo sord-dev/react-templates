@@ -5,39 +5,45 @@ import { useAuth } from '../../contexts/authContext';
 import { Prism } from 'react-syntax-highlighter';
 
 function Create() {
-    const { user } = useAuth();
-    const [modal, setModal] = useState(false);
+  const { user } = useAuth();
+  const [modal, setModal] = useState(false);
 
-    return (
-        <>
-            <Layout>
-                <FileUploadForm user={user} setShow={setModal} />
-            </Layout>
+  return (
+    <>
+      <Layout>
+        <FileUploadForm user={user} setShow={setModal} />
+      </Layout>
 
-            <Modal show={modal} setShow={setModal}>
-                <h3>Utilizing Default Props:</h3>
-                <p>There are two ways to upload JSX, the first way is using the <b>defaultProps</b> parameter provided to each component, you&apos;d do so like demonstrated below.</p>
-                <Prism language='javascript'>
-                    {discordComponentExample}
-                </Prism>
-                <p>Making use of <b>defaultProps.thumbnail</b> for example, we&apos;ll be able to provide whatever image we want to the component.</p>
-                <br />
-                <h3>Providing defaultProps:</h3>
-                <p>Provide the keys and values inside of a JSON object you can add to the form, this will be provided to the preview component as the <b>defaultProps</b>.</p>
+      <TutorialModal show={modal} setShow={setModal} />
+    </>
+  )
+}
 
-                <div style={{ maxWidth: '50%', margin: '0 auto' }}>
-                    <img src="https://i.postimg.cc/mrYjbbSS/component-upload-ssl.png" alt="component upload form screenshot" style={{ border: '1px solid black' }} />
-                </div>
-                <br />
+const TutorialModal = ({ show, setShow }) => {
+  return (
+    <Modal show={show} setShow={setShow}>
+      <h3>Utilizing Default Props:</h3>
+      <p>There are two ways to upload JSX, the first way is using the <b>defaultProps</b> parameter provided to each component, you&apos;d do so like demonstrated below.</p>
+      <Prism language='javascript'>
+        {discordComponentExample}
+      </Prism>
+      <p>Making use of <b>defaultProps.thumbnail</b> for example, we&apos;ll be able to provide whatever image we want to the component.</p>
+      <br />
+      <h3>Providing defaultProps:</h3>
+      <p>Provide the keys and values inside of a JSON object you can add to the form, this will be provided to the preview component as the <b>defaultProps</b>.</p>
 
-                <h3>Utilizing ES6 default prop syntax:</h3>
-                <p>Alternatively, you can use the shorthand for default props syntax, which looks like this.</p>
-                <Prism language='javascript'>
-                    {discordComponentExampleDefaultSyntax}
-                </Prism>
-            </Modal>
-        </>
-    )
+      <div style={{ maxWidth: '50%', margin: '0 auto' }}>
+        <img src="https://i.postimg.cc/mrYjbbSS/component-upload-ssl.png" alt="component upload form screenshot" style={{ border: '1px solid black' }} />
+      </div>
+      <br />
+
+      <h3>Utilizing ES6 default prop syntax:</h3>
+      <p>Alternatively, you can use the shorthand for default props syntax, which looks like this.</p>
+      <Prism language='javascript'>
+        {discordComponentExampleDefaultSyntax}
+      </Prism>
+    </Modal>
+  )
 }
 
 const discordComponentExampleDefaultSyntax = `function DiscordProfile({ React, items = [{ tag: 'github', color: 'white' }, { tag: 'linkedin', color: 'blue' }, { tag: 'cv', color: 'green' }] }) {

@@ -41,10 +41,11 @@ export const FileUploadForm = ({ user = null, setShow }) => {
       selectedFiles.forEach((file) => {
         const reader = new FileReader();
 
+        
         reader.onload = () => {
           const fileContent = reader.result;
 
-          if (file.type == 'text/plain') {
+          if (file.type == 'text/plain' || file.type == 'text/javascript') {
             item.code = fileContent
           } else if (file.type == 'text/css') {
             item.css = fileContent
@@ -54,7 +55,7 @@ export const FileUploadForm = ({ user = null, setShow }) => {
         reader.readAsText(file);
       });
 
-      setTimeout(async () => await uploadComponent({ ...item, title: fileName, user_id: user.user_id, defaultProps: json }, setError), 200)
+      setTimeout(async () => await uploadComponent({ ...item, title: fileName, user_id: user.user_id, defaultProps: json }, setError), 600)
     }
   };
 
