@@ -17,10 +17,12 @@
 
 .modal-content {
   background-color: white;
-  max-width: 600px;
+  max-width: 1200px;
+  max-height: 800px;
   margin: 24px auto;
   padding: 12px 24px;
   border-radius: 6px;
+  overflow-y: scroll;
 }
 
 .toolbar {
