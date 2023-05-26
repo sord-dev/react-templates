@@ -37,10 +37,17 @@ export default function ComponentPage({ component }) {
           <p>{component?.meta?.author}</p>
         </div>
 
+        
+
         <div className={styles['component-preview']}>
           <div className={styles['toolbar']}>
             <div>
-              {owner ? <button onClick={() => handleDeleteComponent(component?.meta?.component_id)} className={'btn ' + styles['btn']}><AiOutlineDelete /> Delete</button> : null}
+              {owner ? (
+                <>
+                  <button onClick={() => handleDeleteComponent(component?.meta?.component_id)} className={'btn ' + styles['btn']}><AiOutlineDelete /> Delete</button>
+                  <button className={'btn ' + styles['btn']}>Edit Props</button>
+                </>
+              ) : null}
             </div>
 
             <div>
@@ -69,6 +76,7 @@ function CodePreview({ codePreview = false, component = { unconverted: 'Error lo
         codePreview ?
           (
             <div className={styles['code-preview']}>
+            <h2>Code Preview:</h2>
               <div>
                 <div className={styles['code-toolbar']}>
                   <h4>JSX</h4>
@@ -126,7 +134,6 @@ export async function getServerSideProps({ query }) {
 }
 
 // server side helpers
-
 function extractFunctionFromCode(code) {
   const exportPattern = /export/gmi;
   const importPattern = /^import .* from .*/gmi;
@@ -145,7 +152,6 @@ function renderExtractedFunction(functionCode) {
 }
 
 // client side helpers
-
 function copyToClipboard(string) {
   navigator.clipboard.writeText(string);
 }
