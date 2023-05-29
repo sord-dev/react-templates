@@ -1,4 +1,6 @@
-# React Template
+# React Template - ON HOLD
+
+## Project is on temporary hold until I get a computer with node 18 again 😭.
 
 This is a web application for sharing React components. Users can upload their components, view previews of uploaded components, and download the component along with associated CSS styles. The project is built using Next.js, Sequelize, and MongoDB.
 
